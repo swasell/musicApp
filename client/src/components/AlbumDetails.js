@@ -2,9 +2,9 @@ import {useEffect, useState} from 'react'
 import { useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios';
 
-const AlbumDetails = () => {
+const AlbumDetails = (props) => {
 
-    const[music, setMusic] = useState ({})
+    const[music, setMusic] = useState ([]);
     const {id} = useParams();
     const navigate = useNavigate();
 
@@ -17,23 +17,16 @@ const AlbumDetails = () => {
         .catch((err) => console.log(err));
     }, [id]);
 
-    const editAlbum = () => {
-        axios.put(`http://localhost:8000/api/albums/${id}`)
-        .then((res) => {
-            console.log(res.data);
-            navigate(`/albums/edit/${music._id}`);
-        })
-        .catch((err) => console.log(err));
-    }
+    const deleteAlbum = (albumId) => {
+        axios.delete(`http://localhost:8000/api/albums/${albumId}`)
+            .then((res) => {
 
-    const deleteAlbum = (AlbumId) => {
-        axios.delete(`http://localhost:8000/api/albums/${id}`)
-        .then((res) => {
-            console.log(res.data);
-            navigate('/dashboard');
-        })
-        .catch((err) => console.log(err));
-    };
+                const noMoreAlbum = music.filter((music) => music._id !== albumId);
+                setMusic(noMoreAlbum);
+                navigate(`/dashboard`);
+            })
+            .catch((err) => console.log(err));
+    }
 
     return(
         <div>
@@ -42,8 +35,8 @@ const AlbumDetails = () => {
             <p>Artist: {music.artist}</p>
             <p>Genre: {music.genre}</p>
             <p>Release Year: {music.releaseYear}</p>
-            <button onclick={editAlbum}>Edit</button>
-            <button onclick={deleteAlbum}>Delete</button>
+            <button onClick={() => navigate(`/albums/edit/${music._id}`)}>Edit</button>
+            <button onClick={() => deleteAlbum(music._id)}>Delete</button>
         </div>
     )
 

@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 const NewAlbum = (props) => {
 
-    const { music, setMusic } = props;
+    // const { music, setMusic } = props;
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [coverArt, setCoverArt] = useState("");
     const [artist, setArtist] = useState("");
-    const [releaseYear, setReleaseYear] = useState("");
+    const [releaseYear, setReleaseYear] = useState(0);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -24,7 +24,7 @@ const NewAlbum = (props) => {
         .then(res => {
             console.log(res)
             console.log(res.data);
-            setMusic([...music,res.data])
+            // setMusic([...music,res.data])
             setTitle('');
             setGenre('');
             setCoverArt('');
@@ -33,7 +33,7 @@ const NewAlbum = (props) => {
             navigate('/dashboard');
         })
         .catch((err) => console.log(err))
-    }
+    };
 
     return(
         <div>
@@ -41,17 +41,17 @@ const NewAlbum = (props) => {
                 <div>
                     <label>Title:</label>
                     <input type="text" name="title"
-                    onchange= {(e) => setTitle(e.target.value)}/>
+                    onChange= {(e) => setTitle(e.target.value)}/>
                 </div>
                 <div>
                     <label>Artist:</label>
                     <input type= "text" name="artist"
-                    onchange= {(e) => setArtist(e.target.value)}/>
+                    onChange= {(e) => setArtist(e.target.value)}/>
                 </div>
                 <div>
                     <label>Genre:</label>
                     <select name="genre" 
-                    onchange= {(e) => setGenre(e.target.value)}>
+                    onChange= {(e) => setGenre(e.target.value)}>
                         <option>Select Genre</option>
                         <option value="Hip Hop">Hip Hop</option>
                         <option value="Rap">Rap</option>
@@ -77,12 +77,12 @@ const NewAlbum = (props) => {
                 <div>
                     <label>Cover Art:</label>
                     <input type= "text" name="coverArt"
-                    onchange= {(e) => setCoverArt(e.target.value)}/>
+                    onChange= {(e) => setCoverArt(e.target.value)}/>
                 </div>
                 <div>
                     <label>Release Year:</label>
                     <input type= "number" name="releaseYear"
-                    onchange= {(e) => setReleaseYear(e.target.value)}/>
+                    onChange= {(e) => setReleaseYear(e.target.value)}/>
                 </div>
                 <input type="submit" value="Submit"/>
             </form>

@@ -8,13 +8,13 @@ const EditAlbum = () => {
     const [genre, setGenre] = useState('');
     const [coverArt, setCoverArt] = useState('');
     const [artist, setArtist] = useState('');
-    const [releaseYear, setReleaseYear] = useState('');
+    const [releaseYear, setReleaseYear] = useState(0);
     const navigate = useNavigate();
     const {id} = useParams();
 
     useEffect(() => {
-        axios.put(`http://localhost:8000/api/albums/${id}`)
-        .then((res) =>{
+        axios.put(`http://localhost:8000/api/albums/edit/${id}`)
+        .then((res) => {
             console.log(res.data)
             setTitle(res.data.title);
             setGenre(res.data.genre);
@@ -27,7 +27,7 @@ const EditAlbum = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:8000/api/albums/${id}`, {
+        axios.put(`http://localhost:8000/api/albums/edit/${id}`, {
             title,
             genre,
             coverArt,
@@ -46,17 +46,17 @@ const EditAlbum = () => {
         <div>
             <label>Title</label>
             <input type= "text" value={title} 
-            onchange={(e) => setTitle(e.target.value)} />
+            onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
             <label>Artist</label>
             <input type= "text" value={artist} 
-            onchange={(e) => setArtist(e.target.value)} />
+            onChange={(e) => setArtist(e.target.value)} />
         </div>
         <div>
             <label>Genre</label>
             <select value={genre} name="genre" 
-            onchange={(e) => setGenre(e.target.value)}>
+            onChange={(e) => setGenre(e.target.value)}>
                 <option>Select Genre</option>
                 <option value="Hip Hop">Hip Hop</option>
                 <option value="Rap">Rap</option>
@@ -82,12 +82,12 @@ const EditAlbum = () => {
         <div>
             <label>Cover Art</label>
             <input type= "text" value={coverArt} 
-            onchange={(e) => setCoverArt(e.target.value)} />
+            onChange={(e) => setCoverArt(e.target.value)} />
         </div>
         <div>
             <label>Release Year</label>
             <input type= "number" value={releaseYear} 
-            onchange={(e) => setReleaseYear(e.target.value)} />
+            onChange={(e) => setReleaseYear(e.target.value)} />
         </div>
         <button>Update</button>
     </form>

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';  
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 const AlbumList = () => {
 
@@ -19,7 +21,7 @@ const AlbumList = () => {
             {music.map((music) => (
                 <div key={music._id} className="album">
                 <img className="album-art" src={music.coverArt} alt={music.title} />
-                <p>{music.title}</p>
+                <Link to ={`/albums/${music._id}`}>{music.title}</Link>
                 </div>
             ))}
         </div>
