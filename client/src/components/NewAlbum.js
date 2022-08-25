@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import axios from'axios'
 import { useNavigate } from 'react-router-dom';
+import './NewAlbum.css'
 
-const NewAlbum = (props) => {
+const NewAlbum = () => {
 
-    // const { music, setMusic } = props;
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [coverArt, setCoverArt] = useState("");
     const [artist, setArtist] = useState("");
     const [releaseYear, setReleaseYear] = useState(0);
+    const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -24,30 +25,33 @@ const NewAlbum = (props) => {
         .then(res => {
             console.log(res)
             console.log(res.data);
-            // setMusic([...music,res.data])
             setTitle('');
             setGenre('');
             setCoverArt('');
             setArtist('');
             setReleaseYear('');
-            navigate('/dashboard');
+            navigate('/');
         })
-        .catch((err) => console.log(err))
+        .catch((err) => setErrors(err.response.data.errors))
     };
 
     return(
-        <div>
+        <div className= "form-container">
             <form onSubmit= {handleSubmit} className="create-form">
                 <div>
                     <label>Title:</label>
                     <input type="text" name="title"
                     onChange= {(e) => setTitle(e.target.value)}/>
+                    {errors.title ? <p className="text-danger">{errors.title.message}</p> : null }
                 </div>
+                <br/>
                 <div>
                     <label>Artist:</label>
                     <input type= "text" name="artist"
                     onChange= {(e) => setArtist(e.target.value)}/>
+                    {errors.artist ? <p className="text-danger">{errors.artist.message}</p> : null }
                 </div>
+                <br/>
                 <div>
                     <label>Genre:</label>
                     <select name="genre" 
@@ -73,20 +77,28 @@ const NewAlbum = (props) => {
                         <option value="Grunge">Grunge</option>
                         <option value="Classical">Classical</option>
                     </select>
+                    {errors.genre ? <p className="text-danger">{errors.genre.message}</p> : null }
                 </div>
+                <br/>
                 <div>
                     <label>Cover Art:</label>
                     <input type= "text" name="coverArt"
                     onChange= {(e) => setCoverArt(e.target.value)}/>
+                    {errors.coverArt ? <p className="text-danger">{errors.coverArt.message}</p> : null }
                 </div>
+                <br/>
                 <div>
                     <label>Release Year:</label>
                     <input type= "number" name="releaseYear"
                     onChange= {(e) => setReleaseYear(e.target.value)}/>
+                    {errors.releaseYear ? <p className="text-danger">{errors.releaseYear.message}</p> : null }
                 </div>
-                <input type="submit" value="Submit"/>
+                <br/>
+                <button>Submit</button>
             </form>
+            <img src={'https://www.rollingstone.com/wp-content/uploads/2019/12/RapAlbums.jpg?w=910&h=511&crop=1'} alt="Album Collage"></img>
         </div>
+
 
     )
 }

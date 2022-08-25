@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
 import { useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios';
+import './AlbumDetails.css'
 
-const AlbumDetails = (props) => {
+const AlbumDetails = () => {
 
-    const[music, setMusic] = useState ([]);
+    const[music, setMusic] = useState ({});
     const {id} = useParams();
     const navigate = useNavigate();
 
@@ -20,17 +21,15 @@ const AlbumDetails = (props) => {
     const deleteAlbum = (albumId) => {
         axios.delete(`http://localhost:8000/api/albums/${albumId}`)
             .then((res) => {
-
-                const noMoreAlbum = music.filter((music) => music._id !== albumId);
-                setMusic(noMoreAlbum);
-                navigate(`/dashboard`);
+                console.log(res.data)
+                navigate('/');
             })
             .catch((err) => console.log(err));
-    }
+    };
 
     return(
-        <div>
-            <img src={music.coverArt} alt={music.coverArt}/>
+        <div className="detail-container">
+            <img className="detail-art" src={music.coverArt} alt={music.coverArt}/>
             <p>Title: {music.title}</p>
             <p>Artist: {music.artist}</p>
             <p>Genre: {music.genre}</p>

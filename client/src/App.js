@@ -12,7 +12,7 @@ function App() {
         <div className="App">
           <Header />
             <Routes>
-              <Route path="/dashboard" element={ <AlbumList /> } />
+              <Route path="/" element={ <AlbumList /> } />
               <Route path="/create" element={ <NewAlbum /> } />
               <Route path="/albums/:id" element={ <AlbumDetails /> } />
               <Route path="/albums/edit/:id" element={ <EditAlbum />} />

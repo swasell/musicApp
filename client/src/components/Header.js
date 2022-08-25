@@ -5,10 +5,14 @@ import './Header.css';
 const Header = () => {
 
     return (
-        <header className="header">
-            <NavLink className="nav-link" to="/dashboard"> Dashboard </NavLink>
-            <NavLink className="nav-link" to="/create"> Add Album </NavLink>
-        </header>
+        <div>
+            <header className="header">
+            <h1>Music App</h1>
+            <hr></hr>
+                <NavLink className="navLink" to="/"> Dashboard </NavLink>
+                <NavLink className="navLink" to="/create"> Add Album </NavLink>
+            </header>
+        </div>
     );
 };
 

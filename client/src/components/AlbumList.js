@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import './AlbumList.css'
 
 
 const AlbumList = () => {
@@ -17,11 +18,12 @@ const AlbumList = () => {
 }, []);
 
     return(
-        <div>
+        <div className="container">
             {music.map((music) => (
                 <div key={music._id} className="album">
                 <img className="album-art" src={music.coverArt} alt={music.title} />
-                <Link to ={`/albums/${music._id}`}>{music.title}</Link>
+                <br/>
+                <NavLink className="album-title" to ={`/albums/${music._id}`}>{music.title}</NavLink>
                 </div>
             ))}
         </div>

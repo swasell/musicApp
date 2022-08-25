@@ -4,7 +4,7 @@ module.exports = {
     createMusic: (req, res) => {
         Music.create(req.body)
             .then(newMusic => res.json(newMusic))
-            .catch(err => res.json(err));
+            .catch(err => res.status(400).json(err));
     },
 
     getAllMusic: (req, res) => {
@@ -15,25 +15,25 @@ module.exports = {
         })
             .catch((err) => {
                 console.log(err)
-                res.json(err)
+                res.status(400).json(err)
         })
     },
 
     getOneMusic: (req, res) => {
         Music.findOne({ _id: req.params.id })
             .then(oneMusic => res.json(oneMusic))
-            .catch(err => res.json(err))
+            .catch(err => res.status(400).json(err))
     },
 
     updateMusic: (req, res) => {
-        Music.findOneAndUpdate({ _id: req.params.id }, req.body, {new:true})
+        Music.findOneAndUpdate({ _id: req.params.id }, req.body, {new:true, runValidators: true})
         .then(updatedMusic => res.json(updatedMusic))
-        .catch(err => res.json(err))
+        .catch(err => res.status(400).json(err))
     },
 
     deleteMusic: (req, res) => {
         Music.deleteOne({ _id: req.params.id })
             .then(deleteMusic => res.json(deleteMusic))
-            .catch(err => res.json(err))
+            .catch(err => res.status(400).json(err))
     }
 }

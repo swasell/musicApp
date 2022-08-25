@@ -1,0 +1,22 @@
+.edit-form {
+    display: inline-block;
+    color: aliceblue;
+    background-color:rgba(0, 0, 0, 0.808);
+    padding: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: left;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+img {
+    width: 400px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.edit-container {
+display: inline-flex;
+}
